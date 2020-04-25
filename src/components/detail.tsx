@@ -39,6 +39,8 @@ const InputsDiv = styled.div`
 `
 
 export class DetailComponent extends React.Component<{}, DetailState> {
+  private onLoadClickBound = this.onLoadClick.bind(this)
+  private onClearClickBound = this.onClearClick.bind(this)
 
   constructor(props: any) {
     super(props)
@@ -64,8 +66,8 @@ export class DetailComponent extends React.Component<{}, DetailState> {
             <input id='useVirtualized' type='checkbox' checked={this.state.useVirtualized} onChange={() => this.setState({ useVirtualized: !this.state.useVirtualized, items: [], selectedId: undefined })} value='Virtualized' />
             <label htmlFor='useVirtualized'>Use virtualization</label>
           </div>
-          <button onClick={() => this.setState({ items: generateItems(numItemsToSend), selectedId: 'id-0' })}>Load Data</button>
-          <button onClick={() => this.setState({ items: [], selectedId: undefined })}>Clear</button>
+          <button onClick={this.onLoadClickBound}>Load Data</button>
+          <button onClick={this.onClearClickBound}>Clear</button>
         </InputsDiv>
         <MyListComponent items={itemsToSend} useVirtualizedRendering={this.state.useVirtualized}>
         </MyListComponent>
@@ -75,5 +77,14 @@ export class DetailComponent extends React.Component<{}, DetailState> {
 
   private onItemSelected(id: string) {
     this.setState({ selectedId: id })
+  }
+
+  private onLoadClick() {
+    const generatedItems = generateItems(numItemsToSend)
+    this.setState({ items: generatedItems, selectedId: generatedItems[0].id })
+  }
+
+  private onClearClick() {
+    this.setState({ items: [], selectedId: undefined })
   }
 }
