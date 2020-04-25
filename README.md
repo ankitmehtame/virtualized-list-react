@@ -1,5 +1,4 @@
-Try out react-window for rendering a virtualized list (way faster for large data sets) 
-The only catch is - it needs row height in pixels
+Try out react-window for rendering a virtualized list (way faster for large data sets). The only catch is - it needs row height in pixels.
 
 react-window available at https://github.com/bvaughn/react-window
 
